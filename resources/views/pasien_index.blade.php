@@ -18,17 +18,29 @@
                                     <th>NO</th>
                                     <th>No Pasien</th>
                                     <th>Nama</th>
-                                </tr>
+                                    <th>Jenis Kelamin</th>
+                                    <th>Umur</th>
+                                    <th>Foto</th>
+                                    <th>Alamat</th>
+                                    <th>Aksi</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 @foreach ($pasien as $item)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->no_pasien }}</td>
-                                        <td>
-                                            {{ $item->nama }}
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->no_pasien }}</td>
+                                    <td>
+                                        {{ $item->nama }}
+                                    </td>
+                                    <td>{{ $item->jk }}</td>
+                                    <td>{{ $item->umur }}</td>
+                                    <td><img src="{{ $item->foto ? asset('storage/images/' . $item->foto) : asset('images/deafult.png') }}" alt="Foto Pasien" width="50px"></td>
+                                    <td>{{ $item->alamat }}</td>
+                                    <td>
+                                        <a href="/pasien/{{ $item->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
+                                        <a href="/pasien/{{ $item->id }}/delete" class="btn btn-danger btn-sm">Delete</a>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>

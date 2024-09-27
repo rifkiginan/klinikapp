@@ -48,6 +48,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/daftar">Pendaftaran Pasien</a>
                         </li>
+                        <main class="py-4">
+                            @if (session()->has('pesan'))
+                                <div class="alert alert-info" role="alert">
+                                    {{ session('pesan') }}
+                                </div>
+                            @endif
+                            @yield('content')
+                        </main>
                     @endauth
                     </ul>
 
