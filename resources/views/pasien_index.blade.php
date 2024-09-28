@@ -19,28 +19,36 @@
                                     <th>No Pasien</th>
                                     <th>Nama</th>
                                     <th>Jenis Kelamin</th>
-                                    <th>Umur</th>
+                                    <th>Usia</th>
                                     <th>Foto</th>
                                     <th>Alamat</th>
                                     <th>Aksi</th>
-                                </tr>
+                                </tr>
                             </thead>
                             <tbody>
                                 @foreach ($pasien as $item)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->no_pasien }}</td>
-                                    <td>
-                                        {{ $item->nama }}
-                                    </td>
-                                    <td>{{ $item->jk }}</td>
-                                    <td>{{ $item->umur }}</td>
-                                    <td><img src="{{ $item->foto ? asset('storage/images/' . $item->foto) : asset('images/deafult.png') }}" alt="Foto Pasien" width="50px"></td>
-                                    <td>{{ $item->alamat }}</td>
-                                    <td>
-                                        <a href="/pasien/{{ $item->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
-                                        <a href="/pasien/{{ $item->id }}/delete" class="btn btn-danger btn-sm">Delete</a>
-                                </tr>
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->no_pasien }}</td>
+                                        <td>{{ $item->nama }}</td>
+                                        <td>{{ $item->jenis_kelamin }}</td>
+                                        <td>{{ $item->umur }}</td>
+                                        <td><img src="{{ $item->foto ? asset('storage/images/' . $item->foto) : asset('images/default.png') }}" alt="Foto Pasien" width="50px"></td>
+                                        <td>{{ $item->alamat }}</td>
+                                        <td>
+                                            <a href="/pasien/{{ $item->id }}/edit" class="btn btn-warning btn-sm ml-2">
+                                                Edit
+                                            </a>
+                                            <form action="/pasien/{{ $item->id }}" method="post" class="d-inline">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-danger btn-sm ml-2"
+                                                    onclick="return confirm('Yakin ingin menghapus data?')">
+                                                    Hapus
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -50,4 +58,4 @@
             </div>
         </div>
     </div>
-@endsection
+@endsection<

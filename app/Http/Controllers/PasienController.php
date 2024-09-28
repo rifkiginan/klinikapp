@@ -35,7 +35,7 @@ class PasienController extends Controller
             'umur' => 'required|numeric',
             'jenis_kelamin' => 'required|in:laki-laki,perempuan',
             'alamat' => 'nullable',
-            'foto' => 'required|image|mimes:jpeg,png,jpg|max:5000',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:5000',
         ]);
         $pasien = new \App\Models\Pasien();
         $pasien->no_pasien = $requestData['no_pasien'];
@@ -49,10 +49,11 @@ class PasienController extends Controller
             $pasien->foto = $request->file('foto')->getClientOriginalName();
             $pasien->save();
         }
-        return redirect('/pasien')->with('pesan', 'Data sudah disimpan');
-    }
+        return redirect('/pasien')->with('pesan', 'Data sudah disimpan');}
 
     /**
+
+    ;'[]
      * Display the specified resource.
      */
     public function show(string $id)
@@ -65,7 +66,8 @@ class PasienController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['pasien'] = \App\Models\Pasien::findOrFail($id);
+        return view('pasien_edit', $data);
     }
 
     /**
@@ -81,6 +83,8 @@ class PasienController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pasien = \App\Models\Pasien::findOrFail($id);
+        $pasien->delete();
+        return back()->with('pesan', 'Data sudah dihapus');
     }
 }
